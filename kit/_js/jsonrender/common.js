@@ -188,7 +188,7 @@ function loadPlayerData(afterFunc, noredirect, loginNameDetail) {
                 $('#editProfileAbout').each(function(i){this.value = player.about;});
             }
             if (player.countryFlagURL) {
-                $('div#country').html('<img src="'+player.countryFlagURL+'" class="country"/>');
+                $('div#country').html('<img src="'+ player.countryFlagURL.replace(/^\/static/, "../static") +'" class="country"/>');
             }
             
             if (typeof(afterFunc) == 'function') {
@@ -198,6 +198,7 @@ function loadPlayerData(afterFunc, noredirect, loginNameDetail) {
     });
 }
 function createBadge(imageURL, tooltip, clazz) {
+    imageURL = imageURL.replace(/^\/static/, "../static");
     var html = '<img src="'+imageURL+'"';
     if (tooltip) {
         html += ' title="'+tooltip+'" onclick="alert(&quot;'+tooltip+'&quot;)"'
@@ -335,10 +336,10 @@ function loadRankingData(path_id, afterFunc) {
                             '<td class="topRankingsGravatar"><img src="' + p.gravatar + '" class="topRankingsGravatar" /></td>'+
                             '<td class="topRankingsName"><font onclick="showProfilePopup(' + p.playerid + ')">' + p.name + '</font></td>'+
                             '<td class="topRankingsBadge">'+
-                              (p.badgeURL ? '<img src="' + p.badgeURL + '" class="topRankingsBadge" title="'+badgeTooltip+'"/>' : '')+
+                              (p.badgeURL ? '<img src="' + p.badgeURL.replace(/^\/static/, "../static") + '" class="topRankingsBadge" title="'+badgeTooltip+'"/>' : '')+
                             '</td>'+
                             '<td class="topRankingsFlag">'+
-                              '<img src="' + (p.playerCountryFlagURL ? p.playerCountryFlagURL : '_images/flags/singPath_on.png') +
+                              '<img src="' + (p.playerCountryFlagURL ? p.playerCountryFlagURL.replace(/^\/static/, "../static") : '_images/flags/singPath_on.png') +
                               '" class="topRankingsFlag"/>'+
                             '</td>'+
                             '<td class="topRankingsSolved">' + p.solved_num + '</td>'+
